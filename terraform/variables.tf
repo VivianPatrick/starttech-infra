@@ -1,4 +1,3 @@
-# Global variables for infra
-variable "region" {
+variable "aws_region" {
   default = "us-east-1"
 }

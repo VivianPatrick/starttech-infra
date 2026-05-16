@@ -31,3 +31,9 @@ module "compute" {
   ec2_sg_id            = module.networking.ec2_sg_id
   iam_instance_profile = module.monitoring.iam_instance_profile_name
 }
+
+module "storage" {
+  source       = "./modules/storage"
+  project_name = var.project_name
+  environment  = var.environment
+}

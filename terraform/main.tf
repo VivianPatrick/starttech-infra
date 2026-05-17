@@ -33,7 +33,10 @@ module "compute" {
 }
 
 module "storage" {
-  source       = "./modules/storage"
-  project_name = var.project_name
-  environment  = var.environment
+  source             = "./modules/storage"
+  project_name       = var.project_name
+  environment        = var.environment
+  private_subnet_ids = [module.networking.private_subnet_id]
+  redis_sg_id        = module.networking.redis_sg_id
+  redis_node_type    = "cache.t3.micro"
 }

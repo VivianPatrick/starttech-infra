@@ -17,3 +17,7 @@ output "cloudfront_domain" {
 output "website_url" {
   value = module.storage.website_url
 }
+
+output "redis_endpoint" {
+  value = module.storage.redis_endpoint
+}

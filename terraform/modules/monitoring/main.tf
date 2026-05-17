@@ -131,3 +131,19 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu" {
     Environment = var.environment
   }
 }
+# ─────────────────────────────────────────────
+# SSM Policy — allows EC2 to be managed via
+# AWS Systems Manager (used by deploy pipeline)
+# ─────────────────────────────────────────────
+resource "aws_iam_role_policy_attachment" "ssm_policy" {
+  role       = aws_iam_role.ec2_cloudwatch_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
+# ─────────────────────────────────────────────
+# ECR Policy — allows EC2 to pull Docker images
+# ─────────────────────────────────────────────
+resource "aws_iam_role_policy_attachment" "ecr_policy" {
+  role       = aws_iam_role.ec2_cloudwatch_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}

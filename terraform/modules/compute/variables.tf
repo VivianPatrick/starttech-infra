@@ -13,7 +13,7 @@ variable "environment" {
 }
 
 variable "ami_id" {
-  description = "AMI ID for the EC2 instance"
+  description = "AMI ID for EC2 instances"
   type        = string
   default     = "ami-0c02fb55956c7d316"
 }
@@ -25,17 +25,50 @@ variable "instance_type" {
 }
 
 variable "public_subnet_id" {
-  description = "Subnet ID where EC2 instance will be launched"
+  description = "First public subnet ID (AZ-a)"
+  type        = string
+}
+
+variable "public_subnet_2_id" {
+  description = "Second public subnet ID (AZ-b) — required by ALB and ASG"
+  type        = string
+}
+
+variable "vpc_id" {
+  description = "VPC ID — required by target group"
   type        = string
 }
 
 variable "ec2_sg_id" {
-  description = "Security group ID for EC2 instances (passed from networking module)"
+  description = "Security group ID for EC2 instances"
+  type        = string
+}
+
+variable "alb_sg_id" {
+  description = "Security group ID for the ALB"
   type        = string
 }
 
 variable "iam_instance_profile" {
-  description = "IAM instance profile name for EC2 (passed from monitoring module)"
+  description = "IAM instance profile name for EC2 CloudWatch access"
   type        = string
   default     = ""
+}
+
+variable "asg_desired" {
+  description = "Desired number of instances in the ASG"
+  type        = number
+  default     = 2
+}
+
+variable "asg_min" {
+  description = "Minimum number of instances in the ASG"
+  type        = number
+  default     = 1
+}
+
+variable "asg_max" {
+  description = "Maximum number of instances in the ASG"
+  type        = number
+  default     = 4
 }
